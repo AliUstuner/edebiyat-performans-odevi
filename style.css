@@ -1,0 +1,921 @@
+/* ================================================
+   TÜRK ŞİİRİ - EDEBİYAT PERFORMANS ÖDEVİ
+   Ana Stil Dosyası
+   ================================================ */
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-bg: #0a0a0f;
+    --color-surface: #12121a;
+    --color-surface-2: #1a1a25;
+    --color-text: #e8e6e3;
+    --color-text-muted: #9b9a97;
+    --color-accent: #c9a96e;
+    --color-accent-light: #e4c98a;
+    --color-kosuk: #2d6a4f;
+    --color-sagu: #7b2d3b;
+    --color-halk: #1d3557;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'Noto Sans', 'Segoe UI', sans-serif;
+    --font-serif: 'Noto Serif', Georgia, serif;
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* --- Navbar --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(10, 10, 15, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(201, 169, 110, 0.1);
+    transition: var(--transition);
+}
+
+.navbar.scrolled {
+    padding: 10px 40px;
+    background: rgba(10, 10, 15, 0.95);
+    border-bottom-color: rgba(201, 169, 110, 0.2);
+}
+
+.nav-brand {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 32px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-accent);
+    transition: var(--transition);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--color-accent);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--color-text);
+    transition: var(--transition);
+}
+
+/* --- Hero Section --- */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a1020 30%, #0f1a2e 60%, #0a0a0f 100%);
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(201, 169, 110, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(45, 106, 79, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(123, 45, 59, 0.08) 0%, transparent 50%);
+}
+
+.hero-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 24px;
+}
+
+.hero-subtitle {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.3s forwards;
+}
+
+.hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--color-text);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s forwards;
+}
+
+.hero-desc {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    max-width: 600px;
+    margin: 0 auto 40px;
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s forwards;
+}
+
+.hero-btn {
+    display: inline-block;
+    padding: 14px 48px;
+    background: transparent;
+    border: 2px solid var(--color-accent);
+    color: var(--color-accent);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: var(--transition);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.9s forwards;
+}
+
+.hero-btn:hover {
+    background: var(--color-accent);
+    color: var(--color-bg);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(201, 169, 110, 0.3);
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeIn 1s 1.5s forwards;
+}
+
+.scroll-indicator span {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+.scroll-arrow {
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid var(--color-accent);
+    border-bottom: 2px solid var(--color-accent);
+    transform: rotate(45deg);
+    animation: scrollBounce 2s infinite;
+}
+
+/* --- Intro Section --- */
+.intro-section {
+    padding: 100px 0;
+    background: var(--color-surface);
+    border-top: 1px solid rgba(201, 169, 110, 0.1);
+    border-bottom: 1px solid rgba(201, 169, 110, 0.1);
+}
+
+.intro-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.intro-card {
+    text-align: center;
+    padding: 48px 32px;
+    background: var(--color-surface-2);
+    border: 1px solid rgba(201, 169, 110, 0.1);
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.intro-card:hover {
+    border-color: rgba(201, 169, 110, 0.3);
+    transform: translateY(-4px);
+}
+
+.intro-icon {
+    font-size: 2.5rem;
+    color: var(--color-accent);
+    margin-bottom: 20px;
+}
+
+.intro-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--color-accent-light);
+    margin-bottom: 16px;
+}
+
+.intro-card p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.8;
+}
+
+/* --- Section Common --- */
+.section {
+    padding: 100px 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.section-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 16px;
+    padding: 6px 16px;
+    border: 1px solid rgba(201, 169, 110, 0.3);
+    border-radius: 2px;
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: var(--color-text);
+    margin-bottom: 16px;
+}
+
+.section-desc {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+/* --- Koşuk Section --- */
+.kosuk-section {
+    background: linear-gradient(180deg, var(--color-bg) 0%, #0a120e 50%, var(--color-bg) 100%);
+}
+
+/* --- Sagu Section --- */
+.sagu-section {
+    background: linear-gradient(180deg, var(--color-bg) 0%, #120a0d 50%, var(--color-bg) 100%);
+}
+
+/* --- Halk Section --- */
+.halk-section {
+    background: linear-gradient(180deg, var(--color-bg) 0%, #0a0e15 50%, var(--color-bg) 100%);
+}
+
+/* --- Poem Card --- */
+.poem-card {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 0;
+    margin-bottom: 80px;
+    background: var(--color-surface);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.poem-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.poem-card.reverse {
+    grid-template-columns: 1fr 380px;
+}
+
+.poem-card.reverse .poem-poster {
+    order: 2;
+}
+
+.poem-card.reverse .poem-body {
+    order: 1;
+}
+
+/* --- Poem Poster (Dijital Afiş) --- */
+.poem-poster {
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.poster-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 1;
+}
+
+.poster-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.15;
+    z-index: 0;
+}
+
+.poster-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 40px 24px;
+}
+
+.poster-number {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 4rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.15);
+    margin-bottom: 16px;
+    line-height: 1;
+}
+
+.poster-title {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.poster-theme {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* --- Poster Backgrounds --- */
+/* Koşuk Posters */
+.poster-spring {
+    background: linear-gradient(135deg, #1a5c2e 0%, #2d8a4e 30%, #4caf70 60%, #1a5c2e 100%);
+}
+.pattern-1 {
+    background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,0.03) 20px, rgba(255,255,255,0.03) 40px);
+}
+
+.poster-autumn {
+    background: linear-gradient(135deg, #8b4513 0%, #d2691e 30%, #b8860b 60%, #654321 100%);
+}
+.pattern-2 {
+    background:
+        radial-gradient(circle at 30% 40%, rgba(255,255,255,0.05) 0%, transparent 50%),
+        radial-gradient(circle at 70% 60%, rgba(255,255,255,0.05) 0%, transparent 50%);
+}
+
+.poster-warrior {
+    background: linear-gradient(135deg, #1a1a2e 0%, #4a1942 30%, #6a0572 50%, #1a1a2e 100%);
+}
+.pattern-3 {
+    background:
+        repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(255,255,255,0.02) 30px, rgba(255,255,255,0.02) 31px),
+        repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(255,255,255,0.02) 30px, rgba(255,255,255,0.02) 31px);
+}
+
+.poster-nature {
+    background: linear-gradient(135deg, #0d3b2e 0%, #1b7a5a 30%, #2ecc71 50%, #0d3b2e 100%);
+}
+.pattern-4 {
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.06) 0%, transparent 70%);
+}
+
+.poster-love {
+    background: linear-gradient(135deg, #4a0e2a 0%, #8b2252 30%, #c2185b 50%, #4a0e2a 100%);
+}
+.pattern-5 {
+    background:
+        radial-gradient(circle at 25% 25%, rgba(255,255,255,0.05) 0%, transparent 30%),
+        radial-gradient(circle at 75% 75%, rgba(255,255,255,0.05) 0%, transparent 30%),
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.03) 0%, transparent 50%);
+}
+
+/* Sagu Posters */
+.poster-sagu1 {
+    background: linear-gradient(135deg, #1a0a0a 0%, #4a1a1a 30%, #7b2d3b 50%, #2a0a0a 100%);
+}
+.pattern-sagu1 {
+    background:
+        repeating-linear-gradient(-45deg, transparent, transparent 15px, rgba(255,255,255,0.02) 15px, rgba(255,255,255,0.02) 30px),
+        radial-gradient(ellipse at 50% 50%, rgba(180, 40, 40, 0.1) 0%, transparent 70%);
+}
+
+.poster-sagu2 {
+    background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 30%, #2a2a5a 50%, #0a0a1a 100%);
+}
+.pattern-sagu2 {
+    background:
+        radial-gradient(circle at 50% 30%, rgba(150, 130, 200, 0.08) 0%, transparent 50%),
+        repeating-linear-gradient(90deg, transparent, transparent 25px, rgba(255,255,255,0.015) 25px, rgba(255,255,255,0.015) 50px);
+}
+
+/* Halk Posters */
+.poster-halk1 {
+    background: linear-gradient(135deg, #1a2a3a 0%, #2a4a6a 30%, #3a6a9a 50%, #1a2a3a 100%);
+}
+.pattern-h1 {
+    background:
+        radial-gradient(circle at 30% 70%, rgba(255,255,255,0.05) 0%, transparent 40%),
+        repeating-linear-gradient(60deg, transparent, transparent 20px, rgba(255,255,255,0.02) 20px, rgba(255,255,255,0.02) 40px);
+}
+
+.poster-halk2 {
+    background: linear-gradient(135deg, #2a1a0a 0%, #5a3a1a 30%, #8b6914 50%, #2a1a0a 100%);
+}
+.pattern-h2 {
+    background: radial-gradient(ellipse at 50% 50%, rgba(201, 169, 110, 0.08) 0%, transparent 60%);
+}
+
+.poster-halk3 {
+    background: linear-gradient(135deg, #0a2a1a 0%, #1a5a3a 30%, #2a8a5a 50%, #0a2a1a 100%);
+}
+.pattern-h3 {
+    background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.04) 0%, transparent 50%),
+        repeating-conic-gradient(rgba(255,255,255,0.01) 0deg 10deg, transparent 10deg 20deg);
+}
+
+.poster-halk4 {
+    background: linear-gradient(135deg, #2a0a0a 0%, #5a1a1a 30%, #8a2a2a 50%, #2a0a0a 100%);
+}
+.pattern-h4 {
+    background:
+        repeating-linear-gradient(135deg, transparent, transparent 25px, rgba(255,255,255,0.02) 25px, rgba(255,255,255,0.02) 50px);
+}
+
+.poster-halk5 {
+    background: linear-gradient(135deg, #1a1a0a 0%, #3a3a1a 30%, #5a5a2a 50%, #1a1a0a 100%);
+}
+.pattern-h5 {
+    background:
+        radial-gradient(circle at 20% 80%, rgba(255,255,255,0.04) 0%, transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.04) 0%, transparent 40%);
+}
+
+/* --- Poem Body --- */
+.poem-body {
+    padding: 48px 40px;
+}
+
+.poem-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.poem-type {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-kosuk);
+    background: rgba(45, 106, 79, 0.1);
+    padding: 4px 12px;
+    border-radius: 2px;
+}
+
+.sagu-type {
+    color: var(--color-sagu);
+    background: rgba(123, 45, 59, 0.1);
+}
+
+.halk-type {
+    color: #4a8ac7;
+    background: rgba(29, 53, 87, 0.2);
+}
+
+.poem-source {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+}
+
+.poem-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 24px;
+}
+
+.poem-text {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 2;
+    color: var(--color-text);
+    margin-bottom: 24px;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.02);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 4px 4px 0;
+}
+
+.poem-text p {
+    margin-bottom: 4px;
+}
+
+.poem-translation {
+    margin-bottom: 20px;
+    padding: 20px;
+    background: rgba(201, 169, 110, 0.05);
+    border-radius: 4px;
+}
+
+.poem-translation h4,
+.poem-analysis h4 {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 10px;
+}
+
+.poem-translation p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.8;
+}
+
+.poem-analysis {
+    margin-bottom: 20px;
+}
+
+.poem-analysis p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.8;
+}
+
+.poem-author {
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.poem-author span {
+    font-size: 0.8rem;
+    color: var(--color-accent);
+    font-weight: 500;
+}
+
+/* --- About Section --- */
+.about-section {
+    padding: 100px 0;
+    background: var(--color-surface);
+    border-top: 1px solid rgba(201, 169, 110, 0.1);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+}
+
+.about-content h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--color-text);
+    margin-bottom: 20px;
+}
+
+.about-content p {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: 32px;
+}
+
+.about-details {
+    display: grid;
+    gap: 16px;
+}
+
+.detail-item {
+    padding: 16px 20px;
+    background: var(--color-surface-2);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 4px 4px 0;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+}
+
+.detail-item strong {
+    color: var(--color-text);
+}
+
+.about-timeline h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--color-text);
+    margin-bottom: 32px;
+}
+
+/* --- Timeline --- */
+.timeline {
+    position: relative;
+    padding-left: 32px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--color-accent), rgba(201, 169, 110, 0.1));
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 28px;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -29px;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    background: var(--color-accent);
+    border-radius: 50%;
+    border: 2px solid var(--color-surface);
+}
+
+.timeline-date {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.timeline-content p {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+}
+
+/* --- Footer --- */
+.footer {
+    padding: 40px 0;
+    text-align: center;
+    border-top: 1px solid rgba(201, 169, 110, 0.1);
+    background: var(--color-bg);
+}
+
+.footer p {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+}
+
+.footer-note {
+    margin-top: 8px;
+    font-size: 0.75rem !important;
+    color: rgba(155, 154, 151, 0.5) !important;
+}
+
+/* --- Animations --- */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scrollBounce {
+    0%, 100% { transform: rotate(45deg) translateY(0); }
+    50% { transform: rotate(45deg) translateY(8px); }
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 1024px) {
+    .poem-card,
+    .poem-card.reverse {
+        grid-template-columns: 1fr;
+    }
+
+    .poem-card.reverse .poem-poster {
+        order: 0;
+    }
+
+    .poem-card.reverse .poem-body {
+        order: 0;
+    }
+
+    .poem-poster {
+        min-height: 300px;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 14px 20px;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: rgba(10, 10, 15, 0.98);
+        padding: 20px;
+        gap: 16px;
+        border-bottom: 1px solid rgba(201, 169, 110, 0.1);
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .intro-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .intro-card {
+        padding: 32px 24px;
+    }
+
+    .section {
+        padding: 60px 0;
+    }
+
+    .section-header {
+        margin-bottom: 48px;
+    }
+
+    .poem-body {
+        padding: 32px 24px;
+    }
+
+    .poem-card {
+        margin-bottom: 48px;
+    }
+
+    .poem-poster {
+        min-height: 250px;
+    }
+
+    .poster-number {
+        font-size: 3rem;
+    }
+
+    .poster-title {
+        font-size: 1.3rem;
+    }
+
+    .hero-title {
+        font-size: 2.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-desc {
+        font-size: 0.95rem;
+    }
+
+    .poem-text {
+        padding: 16px;
+        font-size: 0.9rem;
+    }
+
+    .poem-translation {
+        padding: 16px;
+    }
+}
+
+/* --- Utility: Smooth Scroll Target Offset --- */
+:target {
+    scroll-margin-top: 80px;
+}
+
+/* --- Selection Color --- */
+::selection {
+    background: rgba(201, 169, 110, 0.3);
+    color: var(--color-text);
+}
